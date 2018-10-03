@@ -2,24 +2,26 @@
 
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+const routes = require("./routes");
 
-// Applecation level middelware
-app.use(function(req, res, next) {
-	console.log("first midd");
-	req.myMsg = "hello middelware";
+const checkJson = function(req, res, next) {
+	if (req.body) {
+		console.log("The sky is", req.body.color);
+	} else {
+		console.log("There's no body property");
+	}
 	next();
-});
+};
+// befor using body parser the req.body don't exist
+app.use(checkJson);
+// body parser middel for json parser
+app.use(bodyParser());
+// now req.body exist
+app.use(checkJson);
 
-// Applecation level middelware mounted to a route
-app.use("/dif/:id", function(req, res, next) {
-	// req.params hold route values in url
-	console.log("second midd ID:", req.params.id);
-	// To show that you can pass data from one route or middelware to another
-	console.log("second midd myMsg:", req.myMsg);
-	// req.query is query for searching items.
-	console.log("second midd color query-string:", req.query.color);
-	next();
-});
+// questions routes
+app.use("/questions/", routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(err) {
