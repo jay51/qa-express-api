@@ -12,9 +12,8 @@ app.use(bodyParser.json());
 // questions routes
 app.use("/questions/", routes);
 
-// when a route throws an error, it will contunie going down to middelwares
-// and this middleware will send 404 errors to error handler. without this middleware
-// the browser will return default error handler
+// when no route matches the route requsted
+//  this middleware will send 404 errors to error handler. without this middleware
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	const err = new Error("Not Found");
