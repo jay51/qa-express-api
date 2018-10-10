@@ -5,9 +5,24 @@ const app = express();
 const bodyParser = require("body-parser");
 const routes = require("./routes");
 const logger = require("morgan");
+const mongoose = require("mongoose");
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
+
+// connecting DB
+
+mongoose.connect("mongodb://localhost:27017/qa");
+const db = mongoose.connection;
+
+db.on("error", function(err){
+	console.error("Connection Error:", err);
+});
+
+db.once("open", function(){
+	console.log("db connection successful");
+});
+
 
 // questions routes
 app.use("/questions/", routes);

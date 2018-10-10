@@ -107,9 +107,9 @@ db.once("open", function() {
 				);
 			});
 
-			Animal.find({}, function(err, all) {
-				console.log(err);
-			});
+			// Animal.find({}, function(err, all) {
+			// 	console.log(err);
+			// });
 			// Animal.findBySize("small", function(err, animal) {
 			// 	console.log(
 			// 		`${animal.name} the ${animal.color} ${animal.type} is a ${
