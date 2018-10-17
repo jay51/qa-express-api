@@ -70,5 +70,5 @@ app.use(function(err, req, res, next) {
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(err) {
-	console.log("server has started");
+	console.log("server has started on port:" + port);
 });

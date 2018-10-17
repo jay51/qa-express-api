@@ -51,7 +51,6 @@ router.post("/", function(req, res, next) {
 
 // GET /questions/:qID
 router.get("/:qID", function(req, res, next) {
-	console.log("question ID:", req.question);
 	if (res.question) return res.json(res.question);
 	else {
 		Question.findById(req.params.qID, function(err, question) {
