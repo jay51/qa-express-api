@@ -8,9 +8,9 @@ router.param("qID", function(req, res, next, id) {
 	Question.findById(id, function(err, question) {
 		if (err) return next(err);
 		if (!question) {
-			error = new Error("Not Found");
-			res.status = 404;
-			return next(err);
+			const error = new Error("Not Found");
+			error.status = 404;
+			return next(error);
 		}
 		req.question = question;
 		return next();
@@ -22,9 +22,9 @@ router.param("aID", function(req, res, next, id) {
 	// find answer inside answers list
 	req.answer = req.question.answers.id(id);
 	if (!req.answer) {
-		error = new Error("Not Found");
-		res.status = 404;
-		return next(err);
+		const error = new Error("Not Found");
+		error.status = 404;
+		return next(error);
 	}
 	return next();
 });
